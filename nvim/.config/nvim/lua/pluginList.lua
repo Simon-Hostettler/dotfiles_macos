@@ -21,10 +21,10 @@ Plug('windwp/nvim-autopairs')
 vim.call('plug#end')
 
 
-require('lua.plugins.telescope')
-require('lua.plugins.treesitter')
-require('lua.plugins.lsp')
-require('lua.plugins.nvim-cmp')
+require('plugins.telescope')
+require('plugins.treesitter')
+require('plugins.lsp')
+require('plugins.nvim-cmp')
 
 -- set colorscheme
 vim.cmd('silent! colorscheme onedark')

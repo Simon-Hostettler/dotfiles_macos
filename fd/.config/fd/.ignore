@@ -1,0 +1,6 @@
+**/Documents/**
+**/Library/**
+**/Pictures/**
+**/Zotero/**
+**/Movies/**
+!**/.dotfiles/**
