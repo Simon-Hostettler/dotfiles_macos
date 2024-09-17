@@ -3,7 +3,7 @@ local Plug = vim.fn['plug#']
 
 vim.call('plug#begin')
 
--- plugins 
+-- plugins
 Plug('williamboman/mason.nvim')
 Plug('williamboman/mason-lspconfig.nvim')
 Plug('neovim/nvim-lspconfig')
@@ -12,6 +12,7 @@ Plug('tpope/vim-surround')
 Plug('hrsh7th/nvim-cmp')
 Plug('hrsh7th/cmp-buffer')
 Plug('hrsh7th/cmp-nvim-lsp')
+Plug('VonHeikemen/lsp-zero.nvim')
 Plug('shaunsingh/nord.nvim')
 Plug('olimorris/onedarkpro.nvim')
 Plug('nvim-telescope/telescope.nvim')
@@ -24,7 +25,6 @@ vim.call('plug#end')
 require('plugins.telescope')
 require('plugins.treesitter')
 require('plugins.lsp')
-require('plugins.nvim-cmp')
 
 -- set colorscheme
 vim.cmd('silent! colorscheme onedark')

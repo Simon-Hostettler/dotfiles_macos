@@ -13,5 +13,5 @@ vim.o.termguicolors = true
 -- unmap space and set to leader
 vim.g.mapleader = ' '
 vim.api.nvim_set_keymap('n', '<Leader>w', ':w<CR>', { noremap = true, silent = true })
-
-
+vim.api.nvim_set_option("clipboard", "unnamed")
+vim.api.nvim_set_option("mouse", "")

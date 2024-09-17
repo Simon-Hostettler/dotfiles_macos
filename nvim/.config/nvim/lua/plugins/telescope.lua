@@ -9,22 +9,22 @@ vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
 telescope.setup {
     defaults = {
         vimgrep_arguments = { 'rg',
-                              '--hidden',
-                              '--color=never',
-                              '--no-heading',
-                              '--with-filename',
-                              '--line-number',
-                              '--column',
-                              '--smart-case'
-                            },
-                        },
+            '--hidden',
+            '--color=never',
+            '--no-heading',
+            '--with-filename',
+            '--line-number',
+            '--column',
+            '--smart-case'
+        },
+    },
     pickers = {
         find_files = {
             find_command = { 'rg',
-                             '--files',
-                             '--iglob',
-                             '!.git',
-                             '--hidden' },
+                '--files',
+                '--iglob',
+                '!.git',
+                '--hidden' },
         },
     },
 }
