@@ -19,12 +19,21 @@ export C_INCLUDE_PATH="`xcrun --show-sdk-path`/usr/include/ffi"
 
 # ZSH
 export ZSH="$HOME/.oh-my-zsh"
-export ZSH_THEME="robbyrussell"
 export ZSH_HIGHLIGHT_MAXLENGTH=60
 
 plugins=(git zsh-autosuggestions zsh-syntax-highlighting )
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 source $ZSH/oh-my-zsh.sh
+
+# ZSH PROMPT
+autoload colors
+PROMPT="%(?:%{$fg_bold[green]%}%1{%Bλ%b%} :%{$fg_bold[red]%}%1{%Bλ%b%} ) %{$fg[cyan]%}%B%c%b%{$reset_color%}"
+PROMPT+=' $(git_prompt_info)'
+
+ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg_bold[blue]%}git:(%{$fg[red]%}"
+ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%} "
+ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[blue]%}) %{$fg[yellow]%}%1{✗%}"
+ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[blue]%})"
 
 # FZF
 export FZF_DEFAULT_COMMAND="fd --type f --strip-cwd-prefix --exclude .git --ignore-file $HOME/.config/fd/.ignore"
