@@ -36,6 +36,7 @@ lsp_zero.format_on_save({
         ['lua_ls'] = { 'lua' },
         ['rust_analyzer'] = { 'rust' },
         ['clangd'] = { 'c' },
+        ['pyright'] = { 'python' }
     }
 })
 
@@ -58,7 +59,7 @@ cmp.setup({
 
 require('mason').setup()
 require('mason-lspconfig').setup {
-    ensure_installed = { 'lua_ls', 'rust_analyzer', 'clangd' },
+    ensure_installed = { 'lua_ls', 'rust_analyzer', 'clangd', 'pyright' },
     handlers = {
         -- default handler
         function(server_name)
