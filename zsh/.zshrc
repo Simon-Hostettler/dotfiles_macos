@@ -4,9 +4,11 @@
 # PATH DEPS
 export PATH="/opt/homebrew/Cellar/llvm@11/11.1.0_4/bin:$PATH"
 export PATH="/opt/homebrew/Cellar/llvm@12/12.0.1_1/bin:$PATH"
+export PATH="/opt/homebrew/opt/binutils/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 # make sure ghcup comes first
 export PATH="$HOME/.ghcup/bin:$PATH"
+export PATH="$HOME/mambaforge/bin:$PATH"
 
 export JAVA_HOME=$(/usr/libexec/java_home -v 11.0.21)
 
@@ -15,7 +17,7 @@ export HOMEBREW_FILE="$HOME/.brewfile"
 # COMPILE SETTINGS
 export CPPFLAGS=" -I /opt/homebrew/include"
 export LDFLAGS="-L /opt/homebrew/lib"
-export C_INCLUDE_PATH="`xcrun --show-sdk-path`/usr/include/ffi"
+export C_INCLUDE_PATH="`xcrun --show-sdk-path`/usr/include/ffi:/opt/homebrew/Cellar/jpeg/9f/include"
 
 # ZSH
 export ZSH="$HOME/.oh-my-zsh"
@@ -46,6 +48,22 @@ alias gc="git commit -m"
 alias sshpc="ssh simon@$PC_HOME"
 alias sshpi="ssh simon@$PI_HOME"
 alias vf='fzf --print0 | xargs -0 -o nvim'
+alias study="cd $HOME/Documents/masters/fs25"
+alias icat="kitten icat"
+alias ..='cd ..'
+alias ...='cd ../../'
+alias ....='cd ../../../'
 
+# GLOBAL
+alias -g pc="simon@$PC_HOME"
 [ -f "$HOME/.ghcup/env" ] && source "$HOME/.ghcup/env" # ghcup-env
 
+
+# FUNCTIONS
+function swap()         
+{
+    local TMPFILE=tmp.$$
+    mv "$1" $TMPFILE
+    mv "$2" "$1"
+    mv $TMPFILE "$2"
+}
