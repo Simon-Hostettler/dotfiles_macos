@@ -4,10 +4,12 @@ git clone git@github.com:Simon-Hostettler/dotfiles_macos.git ~/.dotfiles
 ```
 ### Installing Symlinks
 ```
-stow -vt ~ ~/.dotfiles/*/
+cd ~/.dotfiles
+stow -vt ~ */
 ```
 ### Modifying single program
 ```
-stow -vt ~/.dotfiles/[app] # install symlink
-stow -D ~/.dotfiles/[app] # remove symlink
+cd ~/.dotfiles
+stow -vt ~ [app]     # install symlink
+stow -Dvt ~ [app]    # remove symlink
 ```
