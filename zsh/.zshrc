@@ -6,9 +6,9 @@ export PATH="/opt/homebrew/Cellar/llvm@11/11.1.0_4/bin:$PATH"
 export PATH="/opt/homebrew/Cellar/llvm@12/12.0.1_1/bin:$PATH"
 export PATH="/opt/homebrew/opt/binutils/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/go/bin:$PATH"
 # make sure ghcup comes first
 export PATH="$HOME/.ghcup/bin:$PATH"
-export PATH="$HOME/mambaforge/bin:$PATH"
 
 export JAVA_HOME=$(/usr/libexec/java_home -v 11.0.21)
 
@@ -47,9 +47,10 @@ alias ga="git add -u"
 alias gc="git commit -m"
 alias sshpc="ssh simon@$PC_HOME"
 alias sshpi="ssh simon@$PI_HOME"
+alias sshtp="ssh shost@$ZT_TP"
 alias vf='fzf --print0 | xargs -0 -o nvim'
-alias study="cd $HOME/Documents/masters/fs25"
-alias icat="kitten icat"
+alias sp="cd $HOME/code/semester_project"
+alias mp="cd $HOME/Documents/master_thesis"
 alias ..='cd ..'
 alias ...='cd ../../'
 alias ....='cd ../../../'
@@ -67,3 +68,26 @@ function swap()
     mv "$2" "$1"
     mv $TMPFILE "$2"
 }
+
+function gfix()
+{
+    if [ -z "$1" ]; then
+        echo "usage: gfix <commit>" >&2
+        return 1
+    fi
+
+    local target
+    target=$(git rev-parse --verify "$1^{commit}") || return 1
+
+    git commit --fixup="$target" || return 1
+
+    if git rev-parse --verify -q "$target^" >/dev/null; then
+        GIT_SEQUENCE_EDITOR=: git rebase -i --autosquash "$target^"
+    else
+        GIT_SEQUENCE_EDITOR=: git rebase -i --autosquash --root
+    fi
+}
+
+# KEYBINDINGS
+bindkey "^[[1;3D" backward-word
+bindkey "^[[1;3C" forward-word
