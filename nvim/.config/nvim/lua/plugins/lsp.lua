@@ -19,6 +19,21 @@ local lsp_attach = function(client, bufnr)
     vim.keymap.set('n', '<F2>', '<cmd>lua vim.lsp.buf.rename()<cr>', opts)
     vim.keymap.set({ 'n', 'x' }, 'gq', '<cmd>lua vim.lsp.buf.format({async = true})<cr>', opts)
     vim.keymap.set('n', 'ga', '<cmd>lua vim.lsp.buf.code_action()<cr>', opts)
+    vim.keymap.set('n', '<leader>e', function()
+        vim.diagnostic.open_float(nil, { focusable = false })
+    end, opts)
+
+    if client.name == "gopls" then
+        vim.api.nvim_create_autocmd("BufWritePre", {
+            buffer = bufnr,
+            callback = function()
+                vim.lsp.buf.code_action({
+                    context = { only = { "source.organizeImports" } },
+                    apply = true,
+                })
+            end,
+        })
+    end
 end
 
 lsp_zero.extend_lspconfig({
@@ -36,7 +51,8 @@ lsp_zero.format_on_save({
         ['lua_ls'] = { 'lua' },
         ['rust_analyzer'] = { 'rust' },
         ['clangd'] = { 'c' },
-        ['pyright'] = { 'python' }
+        ['pyright'] = { 'python' },
+        ['gopls'] = { 'go' }
     }
 })
 
@@ -59,11 +75,31 @@ cmp.setup({
 
 require('mason').setup()
 require('mason-lspconfig').setup {
-    ensure_installed = { 'lua_ls', 'rust_analyzer', 'clangd', 'pyright' },
+    ensure_installed = { 'lua_ls', 'rust_analyzer', 'clangd', 'pyright', 'gopls' },
     handlers = {
-        -- default handler
         function(server_name)
             lspconfig[server_name].setup({})
+        end,
+
+        ['gopls'] = function()
+            lspconfig.gopls.setup({
+                settings = {
+                    gopls = {
+                        gofumpt = true,
+                        analyses = {
+                            unusedparams = true,
+                            shadow = true,
+                        },
+                        staticcheck = true,
+                        ["formatting.gofumpt"] = true,
+                        ["ui.completion.usePlaceholders"] = true,
+                        ["ui.diagnostic.analyses"] = {
+                            unusedparams = true,
+                            shadow = true,
+                        },
+                    },
+                },
+            })
         end,
     },
 }

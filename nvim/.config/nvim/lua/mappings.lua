@@ -9,6 +9,7 @@ vim.o.smartindent = true
 vim.o.wrap = false
 vim.o.cursorline = true
 vim.o.termguicolors = true
+vim.o.hidden = true
 
 -- unmap space and set to leader
 vim.g.mapleader = ' '
